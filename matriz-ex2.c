@@ -32,7 +32,8 @@ float NAno[NumMATERIAS][NumTRIMESTRE];
 
 
 
-
+/*Esse for coleta as notas inseridas pelo usuario e guarda na memoria
+*/
 for (materias = 0 ; materias < NumMATERIAS ; materias++ ) { 
     
     
@@ -47,7 +48,8 @@ for (materias = 0 ; materias < NumMATERIAS ; materias++ ) {
 
 
 
- 
+/*aqui faz a impressão inversa, começando a imprimir pela ultima
+fazendo o inverso, a ultima primeiro e a primeira por ultimo*/ 
 for (materias =0 ; materias<NumMATERIAS ; materias++){
 
     for (trimestre = NumTRIMESTRE - 1 ; trimestre >= 0 ; trimestre --){
