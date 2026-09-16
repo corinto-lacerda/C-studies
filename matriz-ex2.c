@@ -23,7 +23,7 @@ printf("\n|_________calculadora de notas______|");
 printf("\n|___________________________________|");
 
 printf("\n\n\n Me informe o numero de Materias\n");
- fflush(stdin);
+ //fflush(stdin);
 scanf ("%d", &NumMATERIAS);
 
 printf("\n %d \n", NumMATERIAS);
@@ -49,10 +49,16 @@ for (materias = 0 ; materias < NumMATERIAS ; materias++ ) {
 
 
 /*aqui faz a impressão inversa, começando a imprimir pela ultima
-fazendo o inverso, a ultima primeiro e a primeira por ultimo*/ 
+fazendo o inverso, a ultima primeiro e a primeira por ultimo
+*/ 
+
+
+
 
 for (materias = NumMATERIAS-1;materias>=0 ; materias --){
-//for (materias =0 ; materias<NumMATERIAS ; materias++){
+/*/for (materias =0 ; materias<NumMATERIAS ; materias++){ essa linha não estava correta, ela só invertia os valores dentro das linhas
+mas não as linhas, agora estará correto */
+
 
     for (trimestre = NumTRIMESTRE - 1 ; trimestre >= 0 ; trimestre --){
         
