@@ -13,14 +13,14 @@ O programa irá retornar [6][5][4]
 #include <stdio.h>
 
 #define NumTRIMESTRE 4
+void limpar_tela();
+void calculadora_notas();
 
 int main() {
-
+limpar_tela();
 int NumMATERIAS, materias, trimestre;
 
-printf("\n_____________________________________");
-printf("\n|_________calculadora de notas______|");
-printf("\n|___________________________________|");
+calculadora_notas();
 
 printf("\n\n\n Me informe o numero de Materias\n");
  //fflush(stdin);
@@ -38,21 +38,26 @@ for (materias = 0 ; materias < NumMATERIAS ; materias++ ) {
     
     
     for(trimestre = 0 ; trimestre < NumTRIMESTRE ; trimestre++) { 
-        printf("Informe a nota da materia %d\n", materias+1);
+        limpar_tela();
+        calculadora_notas();
+        
+        
+        printf("\nInforme a nota da materia %d\n", materias+1);
+
+        
        
         scanf("%f", &NAno[materias][trimestre]);
     }
     printf("\n");
 } 
 
-
+limpar_tela();
+calculadora_notas();
 
 
 /*aqui faz a impressão inversa, começando a imprimir pela ultima
 fazendo o inverso, a ultima primeiro e a primeira por ultimo
 */ 
-
-
 
 
 for (materias = NumMATERIAS-1;materias>=0 ; materias --){
@@ -62,9 +67,27 @@ mas não as linhas, agora estará correto */
 
     for (trimestre = NumTRIMESTRE - 1 ; trimestre >= 0 ; trimestre --){
         
+        
         printf ("%.2f ", NAno[materias][trimestre]);
     }
     printf ("\n");
 }
 
+}
+
+
+
+
+
+/*funções de escrita e limpeza de tela*/
+void calculadora_notas(){
+printf("\n_____________________________________");
+printf("\n|_________calculadora de notas______|");
+printf("\n|___________________________________|\n");
+}
+
+
+
+void limpar_tela(){
+    system("clear");
 }
