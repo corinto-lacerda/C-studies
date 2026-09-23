@@ -4,11 +4,11 @@ Programa em C feito para exercitar o aprendizado da linguagem. A ideia é docume
 
 No fim, o programa serve para cadastrar alunos, registrar notas por trimestre, calcular a média e informar se o aluno foi aprovado ou reprovado. Tudo 100% em C.
 
-Escrito e testado pensando em **Linux** (usa `system("clear")` para limpar a tela, o que não funciona no Windows).
+Escrito e testado pensando em **Linux**.
 
 ## Como funciona
 
-1. Pergunta o número de matérias/alunos.
+1. Pergunta o número de matérias.
 2. Para cada um, pede a nota dos 4 trimestres (`NumTrimestre`), validando que cada nota esteja entre 0 e 10.
 3. Soma as notas, calcula a média (`total / número de trimestres`) e compara com a nota de corte (`6.5`).
 4. Exibe o total, a média e se o aluno foi **Aprovado** ou **Reprovado**.
