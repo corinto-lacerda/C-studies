@@ -5,7 +5,10 @@ Claro, algumas coisas irão ficar de fora, coisas que eu ainda não vi utilidade
 
 no fim, a função do programa será documentar alunos, notas, medias e se eles foram ou não aprovados. tudo 100% em C.
 
-tentarei deixar muito bem comentado e documentado para aqueles que querem começar a estudar programação.*/
+tentarei deixar muito bem comentado e documentado para aqueles que querem começar a estudar programação.
+
+
+Lembrando, esse codigo foi escrito pensando no Linux.*/
 
 
 
@@ -13,8 +16,11 @@ tentarei deixar muito bem comentado e documentado para aqueles que querem começ
 #include <stdlib.h>
 #include <stdio.h>
 
-//define cria uma constante, é um lugar na memoria com valor fixo no codifo, nada irá mudar o valor dele!
+//define cria uma constante!
 #define NumTrimestre 4
+
+
+
 
 /*estou invocando as funções do programa, é interessante manter a função main, no caso o corpo principal do seu codigo no inicio
 então, as funções, por boa pratica devem ser contruidas lá no final.
@@ -22,78 +28,33 @@ mas o computador lê linha por linha, ou seja, ele ler 1°,2°,3°. quando ele v
 busca a correspondencia no codigo
 pronto, o codigo está utilizando sua função em qualquer parte
 */
-void LimparTela();
-void CalcNotas();
-void function_media(float notas, float Materias);
+void limpar_tela();
+void escrever_titulo();
+void calcular_media(float notas, float Materias);
+void ler_notas(float matriz[][NumTrimestre], int num_materias);
+void calcular_notas(float total ,float matriz[][NumTrimestre], int num_materias);
+
+
+
 
 
 int main() {
-    LimparTela();
+    limpar_tela();
     int NumMaterias, Materias, Trimestre; //declaração das variaveis
 
-    CalcNotas(); //invocando uma função
+    escrever_titulo(); //invocando uma função
 
     printf("\n\n\n Me informe o numero de Materias\n");
- //fflush(stdin);
+
     scanf ("%d", &NumMaterias);
 
     printf("\n %d \n", NumMaterias);
     float NotasAno[NumMaterias][NumTrimestre], SomaMedia;
 
-
-
-
-/*Esse "for" coleta as notas inseridas pelo usuario e guarda na memoria
-*/
-        for (Materias = 0 ; Materias < NumMaterias ; Materias++ ) { 
-    
-    
-            for(Trimestre = 0 ; Trimestre < NumTrimestre ; Trimestre++) { 
-                LimparTela();
-                CalcNotas();
-        
-        
-                printf("\nInforme a nota da materia %d no %d° Trimestre\n", Materias+1, Trimestre+1);
-
-        
-       
-                scanf("%f", &NotasAno[Materias][Trimestre]);
-            }
-            printf("\n");
-        } 
-
-LimparTela();
-CalcNotas();
-
-
-/*esse "for" faz a impressão faz a soma dos valores dos trimestres
-
-logica
-
-materia inicia em 0, se a materia for menor que NumMaterias, adicione 1 a materia ex: materia vale 1? ao fim materia valera 2*/
- 
-    for (Materias = 0;Materias<NumMaterias ; Materias ++){
-
-        SomaMedia = 0;// sempre que o loop acontecer, essa variavel voltará a valer zero
-        printf("Notas : ");
-    
-    
-            for (Trimestre = 0 ; Trimestre < NumTrimestre ; Trimestre ++){/*trimestre começa valendo 0, enquanto trimestre for menor que Num trimestre
-                adicione 1 ao ao trimestre
-                
-                isso o loop que faz a soma das notas ao mesmo tempo que imprime seus valores*/
-        
-                SomaMedia = SomaMedia + NotasAno[Materias][Trimestre];//aqui vai adicionado ao somamedia os valores informados pelo usuario
-        
-       
-                printf ("%.2f ", NotasAno[Materias][Trimestre]);
-        
-            }
-    /*invocando a função*/
-        function_media(SomaMedia, NumTrimestre);//invocando função que calcula a media
-    
-        printf ("\n");
-    }
+ler_notas(NotasAno, NumMaterias );
+limpar_tela();
+escrever_titulo();
+calcular_notas( SomaMedia, NotasAno, NumMaterias);
 
 }
 
@@ -101,16 +62,50 @@ materia inicia em 0, se a materia for menor que NumMaterias, adicione 1 a materi
 
 
 
+
+
+void calcular_notas(float total ,float matriz[][NumTrimestre], int num_materias){
+    for(int aluno = 0; aluno <  num_materias ; aluno ++){
+        total = 0;
+        for(int trimestre = 0 ; trimestre < NumTrimestre ; trimestre ++){
+            total = total + matriz[aluno][trimestre];
+            printf("%.2f ",matriz[aluno][trimestre]);
+        }
+        calcular_media(total, NumTrimestre);//invocando função que calcula a media
+        printf("\n");
+    }
+    
+
+}
+//função que lê as notas e guarda na matriz
+void ler_notas(float matriz[][NumTrimestre], int num_materias){
+    
+
+    for (int aluno = 0; aluno < num_materias ; aluno++) {
+        for (int trimestre = 0; trimestre < NumTrimestre ; trimestre ++) { 
+            printf("\n Informe a nota do %d° trimestre : ", trimestre+1);
+            scanf(" %f",&matriz[aluno][trimestre]);
+                while(matriz[aluno][trimestre] < 0 || matriz[aluno][trimestre] > 10)//validar se a nota está corretamente inserida
+                {
+                    printf("\nInforme uma nota valida, entre 0 e 10 por favor\n");
+                    scanf(" %f",&matriz[aluno][trimestre]);
+
+                }
+                
+        }
+    }
+}
+
 /*funções de escrita e limpeza de tela*/
-void CalcNotas(){//função que desenha na tela, ja que seria um desenho complexo, mais facil criar uma função apenas para isso
+void escrever_titulo(){//função que desenha na tela, ja que seria um desenho complexo, mais facil criar uma função apenas para isso
     printf("\n_____________________________________");
     printf("\n|_________calculadora de notas______|");
     printf("\n|___________________________________|\n");
 }
-void LimparTela(){ //função que limpa a tela no linux, não funciona no windows
+void limpar_tela(){ //função que limpa a tela no linux, não funciona no windows
     system("clear");
 }
-void function_media(float soma,  float materia){ //essa é a função que calcula media e informa se o aluno está ou não aprovado
+void calcular_media(float soma,  float materia){ //essa é a função que calcula media e informa se o aluno está ou não aprovado
     /*função que realiza a soma e divisão para extrair total e media*/
     float media = soma/materia/*pega a variavel media e faz do valor dela uma operação matematica
     soma divido por materia*/;  
@@ -124,8 +119,19 @@ void function_media(float soma,  float materia){ //essa é a função que calcul
 
     
     printf("  o Total = %.2f ---------- a Média = %.2f \n", soma, media);//ao fim da função ela expõe, valor total e media 
-    
 
+/*
+_____________________________________
+|_________calculadora de notas______|
+|___________________________________|
+Notas : 1.00 2.00 3.00 4.00 
+Você foi Reprovado!  o Total = 10.00 ---------- a Média = 2.50 
+
+Notas : 1.00 2.00 3.00 4.00 
+Você foi Reprovado!  o Total = 10.00 ---------- a Média = 2.50 
+
+
+esse seria o retorno final do codigo até o momento  */
 
         
 }
